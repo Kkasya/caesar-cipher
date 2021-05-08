@@ -1,5 +1,6 @@
 const err = (message) => {
-  process.stderr.write(message);
+  const errorMessage = 'Error: ' + message;
+  process.stderr.write(errorMessage);
   process.exit(1);
 };
 

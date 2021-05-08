@@ -1,8 +1,10 @@
-const stream = require('stream');
 const fs = require('fs');
 const {program} = require('commander');
-const {myParseInt, coder, definePath} = require('./check-data');
+
+const {myParseInt} = require('./check-data');
+const {definePath} = require('./define-path');
 const {err} = require('./show-error');
+const {Transform} = require('./Transform');
 
 let pathInput;
 let pathOutput;
@@ -26,24 +28,11 @@ program
 
 program.parse(process.argv);
 
-
 const options = program.opts();
-if (!options.shift) err('Shift (s) is required option. Please enter it.');
+if (!options.shift && (Number(options.shift) !== 0)) err('Shift (s) is required option. Please enter it.');
 if (!options.action) err('Action (a) is required option. Please enter it.');
 
-class Transform extends stream.Transform {
-  _transform(data, encoding, callback) {
-    const dataArr = data.toString().split('');
-    const shift = options.shift;
-
-    dataArr.forEach((char) => {
-      this.push(coder(char, shift, action))
-    });
-    callback();
-  }
-}
-
-const transform = new Transform();
+const transform = new Transform(options.shift, action);
 
 const read = (pathInput) ? fs.createReadStream(pathInput) : process.stdin;
 const write = (pathOutput) ? fs.createWriteStream(pathOutput, {flags: 'a'}) : process.stdout;
