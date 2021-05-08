@@ -1,3 +1,7 @@
+# Install
+### To install this project clone it on your PC: https://github.com/Kkasya/caesar-cipher -b develop
+### Open cloned folder in your code editor and install dependencies with -npm i
+
 # Start
 ### To start program you must enter *a shift (--shift or -s)* - an integer (positive or not), and *an action (--action or -s) - decode or encode.*.
 ### For example: 
