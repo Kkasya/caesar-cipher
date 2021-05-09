@@ -22,8 +22,8 @@ const setTypeTransform = (value) => {
 
 program
   .option('-s, --shift <number>', 'a shift', myParseInt)
-  .option('-i, --input <string>', 'an input file', (value) => setPath(value, 'i'))
-  .option('-o, --output <string>', 'an output file', (value) => setPath(value, 'o'))
+  .option('-i, --input [string]', 'an input file', (value) => setPath(value, 'i'))
+  .option('-o, --output [string]', 'an output file', (value) => setPath(value, 'o'))
   .option('-a, --action <string>', 'an action encode/decode', setTypeTransform);
 
 program.parse(process.argv);
